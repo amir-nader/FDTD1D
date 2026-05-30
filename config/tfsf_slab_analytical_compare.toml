@@ -1,0 +1,63 @@
+[simulation]
+nx = 401
+dx = 1.0e-3
+courant_factor = 0.99
+nsteps = 2200
+save_every = 1
+
+[excitation]
+type = "tfsf"
+start_index = 80
+end_index = 330
+incident_eps_r = 1.0
+incident_mu_r = 1.0
+
+[boundary]
+left = "abc"
+right = "abc"
+
+[material]
+type = "layered"
+
+[[material.layers]]
+start_index = 180
+end_index = 240
+eps_r = 4.0
+mu_r = 1.0
+
+[source]
+type = "ricker"
+amplitude = 1.0
+frequency = 1.5e9
+t0 = 8.0e-10
+
+[[monitors]]
+name = "reflected"
+index = 60
+
+[[monitors]]
+name = "incident"
+index = 130
+
+[[monitors]]
+name = "transmitted"
+index = 290
+
+[diagnostics]
+enabled = true
+incident_monitor = "incident"
+reflected_monitor = "reflected"
+transmitted_monitor = "transmitted"
+window = "none"
+frequency_min = 2.0e8
+frequency_max = 3.0e9
+frequency_count = 121
+
+[output]
+field = "E"
+file = "outputs/tfsf_slab_analytical_compare.gif"
+fps = 20
+title_prefix = "TF/SF slab analytical comparison"
+show_material = true
+label_materials = true
+label_boundaries = true

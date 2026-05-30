@@ -1,0 +1,15 @@
+# Julia package/local build state
+.julia/
+*.ji
+
+# Generated simulation artifacts
+outputs/
+*.gif
+*.png
+*.s1p
+*.s2p
+
+# Local editor/OS files
+.DS_Store
+.vscode/
+.idea/

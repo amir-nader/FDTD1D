@@ -1,0 +1,59 @@
+[simulation]
+nx = 401
+dx = 1.0e-3
+courant_factor = 0.99
+nsteps = 1800
+save_every = 4
+
+[excitation]
+type = "tfsf"
+start_index = 90
+end_index = 320
+incident_eps_r = 1.0
+incident_mu_r = 1.0
+
+[boundary]
+left = "abc"
+right = "abc"
+
+[material]
+type = "layered"
+
+[[material.layers]]
+start_index = 180
+end_index = 240
+eps_r = 4.0
+mu_r = 1.0
+
+[source]
+type = "gaussian"
+amplitude = 1.0
+t0 = 4.0e-11
+spread = 1.2e-11
+
+[[monitors]]
+name = "reflected"
+index = 60
+
+[[monitors]]
+name = "incident"
+index = 130
+
+[[monitors]]
+name = "transmitted"
+index = 290
+
+[diagnostics]
+enabled = true
+incident_monitor = "incident"
+reflected_monitor = "reflected"
+transmitted_monitor = "transmitted"
+
+[output]
+field = "E"
+file = "outputs/tfsf_dielectric_slab.gif"
+fps = 20
+title_prefix = "TF/SF dielectric slab"
+show_material = true
+label_materials = true
+label_boundaries = true

@@ -1,0 +1,35 @@
+[simulation]
+nx = 401
+dx = 1.0e-3
+courant_factor = 0.99
+nsteps = 1400
+save_every = 4
+
+[excitation]
+type = "tfsf"
+start_index = 120
+end_index = 300
+incident_eps_r = 1.0
+incident_mu_r = 1.0
+
+[boundary]
+left = "abc"
+right = "abc"
+
+[material]
+type = "vacuum"
+
+[source]
+type = "gaussian"
+amplitude = 1.0
+t0 = 4.0e-11
+spread = 1.2e-11
+
+[output]
+field = "E"
+file = "outputs/tfsf_gaussian.gif"
+fps = 20
+title_prefix = "1D FDTD with TF/SF excitation"
+show_material = true
+label_materials = true
+label_boundaries = true

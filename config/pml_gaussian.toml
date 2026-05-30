@@ -1,0 +1,43 @@
+[simulation]
+nx = 401
+dx = 1.0e-3
+courant_factor = 0.99
+nsteps = 1600
+save_every = 4
+source_x = 0.18
+
+[excitation]
+type = "soft"
+
+[boundary]
+left = "pml"
+right = "pml"
+pml_thickness = 0.04
+pml_order = 3
+pml_target_reflection = 1.0e-6
+
+[material]
+type = "vacuum"
+
+[source]
+type = "gaussian"
+amplitude = 1.0
+t0 = 4.0e-11
+spread = 1.2e-11
+
+[[monitors]]
+name = "left_probe"
+x = 0.10
+
+[[monitors]]
+name = "right_probe"
+x = 0.30
+
+[output]
+field = "E"
+file = "outputs/pml_gaussian.gif"
+fps = 20
+title_prefix = "Gaussian pulse with PML"
+show_material = true
+label_materials = true
+label_boundaries = true

@@ -1,0 +1,65 @@
+[simulation]
+nx = 501
+dx = 1.0e-3
+courant_factor = 0.99
+nsteps = 2600
+save_every = 1
+
+[excitation]
+type = "tfsf"
+start_x = 0.08
+end_x = 0.42
+incident_eps_r = 1.0
+incident_mu_r = 1.0
+
+[boundary]
+left = "pml"
+right = "pml"
+pml_thickness = 0.04
+pml_order = 3
+pml_target_reflection = 1.0e-6
+
+[material]
+type = "layered"
+
+[[material.layers]]
+start_x = 0.25
+end_x = 0.50
+eps_r = 4.0
+mu_r = 1.0
+
+[source]
+type = "gaussian"
+amplitude = 1.0
+t0 = 8.0e-10
+spread = 1.6e-10
+
+[[monitors]]
+name = "incident"
+x = 0.16
+
+[[monitors]]
+name = "transmitted"
+x = 0.40
+
+[diagnostics]
+enabled = true
+incident_monitor = "incident"
+reflected_monitor = "incident"
+transmitted_monitor = "transmitted"
+window = "hann"
+gate_start = 5.5e-10
+gate_end = 2.2e-9
+frequency_min = 2.0e8
+frequency_max = 3.0e9
+frequency_count = 121
+comparison_plot = "outputs/halfspace_reflection_fdtd_vs_analytical.png"
+
+[output]
+field = "E"
+file = "outputs/tfsf_halfspace_reflection.gif"
+fps = 20
+title_prefix = "TF/SF dielectric half-space reflection"
+show_material = true
+label_materials = true
+label_boundaries = true

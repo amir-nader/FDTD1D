@@ -1,0 +1,53 @@
+[simulation]
+nx = 501
+dx = 1.0e-3
+courant_factor = 0.99
+nsteps = 2200
+save_every = 4
+source_x = 0.12
+
+[excitation]
+type = "soft"
+
+[boundary]
+left = "pml"
+right = "pml"
+pml_thickness = 0.04
+pml_order = 3
+pml_target_reflection = 1.0e-6
+
+[material]
+type = "lorentz"
+
+[[material.layers]]
+center_x = 0.28
+thickness = 0.08
+eps_inf = 1.5
+delta_eps = 3.0
+omega_0 = 1.2566370614e10
+gamma = 1.2566370614e9
+mu_r = 1.0
+sigma_e = 0.0
+
+[source]
+type = "gaussian"
+amplitude = 1.0
+t0 = 6.0e-11
+spread = 1.6e-11
+
+[[monitors]]
+name = "before_slab"
+x = 0.20
+
+[[monitors]]
+name = "after_slab"
+x = 0.36
+
+[output]
+field = "E"
+file = "outputs/lorentz_slab.gif"
+fps = 20
+title_prefix = "Lorentz dispersive slab"
+show_material = true
+label_materials = true
+label_boundaries = true

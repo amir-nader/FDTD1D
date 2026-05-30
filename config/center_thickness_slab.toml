@@ -1,0 +1,46 @@
+[simulation]
+nx = 401
+dx = 1.0e-3
+courant_factor = 0.99
+nsteps = 1800
+save_every = 4
+source_x = 0.08
+
+[excitation]
+type = "soft"
+
+[boundary]
+left = "abc"
+right = "abc"
+
+[material]
+type = "layered"
+
+[[material.layers]]
+center_x = 0.20
+thickness = 0.06
+eps_r = 4.0
+mu_r = 1.0
+
+[source]
+type = "gaussian"
+amplitude = 1.0
+t0 = 4.5e-11
+spread = 1.2e-11
+
+[[monitors]]
+name = "before_slab"
+x = 0.14
+
+[[monitors]]
+name = "after_slab"
+x = 0.27
+
+[output]
+field = "E"
+file = "outputs/center_thickness_slab.gif"
+fps = 20
+title_prefix = "Center/thickness slab"
+show_material = true
+label_materials = true
+label_boundaries = true

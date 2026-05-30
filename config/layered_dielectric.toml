@@ -1,0 +1,44 @@
+[simulation]
+nx = 401
+dx = 1.0e-3
+courant_factor = 0.99
+nsteps = 1600
+save_every = 4
+source_position = 90
+
+[excitation]
+type = "soft"
+
+[boundary]
+left = "pec"
+right = "pec"
+
+[material]
+type = "layered"
+
+[[material.layers]]
+start_index = 150
+end_index = 260
+eps_r = 4.0
+mu_r = 1.0
+
+[[material.layers]]
+start_index = 300
+end_index = 340
+eps_r = 2.25
+mu_r = 1.0
+
+[source]
+type = "gaussian"
+amplitude = 1.0
+t0 = 5.0e-11
+spread = 1.5e-11
+
+[output]
+field = "E"
+file = "outputs/layered_dielectric.gif"
+fps = 20
+title_prefix = "Layered dielectric test"
+show_material = true
+label_materials = true
+label_boundaries = true

@@ -1,0 +1,38 @@
+[simulation]
+nx = 401
+dx = 1.0e-3
+courant_factor = 0.99
+nsteps = 1400
+save_every = 4
+source_x = 0.14
+
+[excitation]
+type = "soft"
+
+[boundary]
+left = "pec"
+right = "abc"
+
+[material]
+type = "layered"
+
+[[material.layers]]
+start_x = 0.18
+end_x = 0.24
+eps_r = 4.0
+mu_r = 1.0
+
+[source]
+type = "gaussian"
+amplitude = 1.0
+t0 = 4.0e-11
+spread = 1.2e-11
+
+[output]
+field = "E"
+file = "outputs/position_based_soft_source.gif"
+fps = 20
+title_prefix = "Position-based soft source"
+show_material = true
+label_materials = true
+label_boundaries = true
