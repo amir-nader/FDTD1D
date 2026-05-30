@@ -2008,16 +2008,24 @@ end
 
 function unwrap_phase(phases::AbstractVector{<:Real})
     unwrapped = collect(Float64, phases)
-    for i in 2:length(unwrapped)
-        delta = unwrapped[i] - unwrapped[i - 1]
+    inds = eachindex(unwrapped)
+
+    firstind = first(inds)
+    prev = firstind
+
+    @inbounds for cur in Iterators.drop(inds, 1)
+        delta = unwrapped[cur] - unwrapped[prev]
         if delta > π
-            unwrapped[i:end] .-= 2π
+            unwrapped[cur:end] .-= 2π
         elseif delta < -π
-            unwrapped[i:end] .+= 2π
+            unwrapped[cur:end] .+= 2π
         end
+        prev = cur
     end
+
     return unwrapped
 end
+
 
 function compute_sparameter_delays(sparams; parameter::Symbol = :s21)
     hasproperty(sparams, parameter) ||
